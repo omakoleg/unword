@@ -17,5 +17,8 @@
     "unlimitedStorage",
     "storage",
     "browsingData"
-  ]
+	],
+	"icons": {
+    "16": "16x16_icon.png"
+	}
 }

@@ -1,5 +1,5 @@
 chrome.contextMenus.create({
-    title: 'Memorize to unword',
+    title: 'Memorize',
     id: 'unword-context',
     contexts: ['selection'],
 });

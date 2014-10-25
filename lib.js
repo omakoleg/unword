@@ -15,9 +15,12 @@ function initDb(callback){
   openRequest.onupgradeneeded = function(e) {
     console.log("onupgradeneeded");
     var thisDB = e.target.result;
-    // if(!hisDB.objectStoreNames.contains(OBJECT_STORE)) {
-      thisDB.createObjectStore(store_name, { keyPath: 'id', autoIncrement: true });
-    // }
+    if(!hisDB.objectStoreNames.contains(store_name)) {
+      thisDB.createObjectStore(store_name, { 
+        keyPath: 'id', 
+        autoIncrement: true 
+      });
+    }
   }
   openRequest.onsuccess = function(e) {
       console.log("Success!");
@@ -44,24 +47,83 @@ function addData(text, web){
 }
 
 function readData(){
+  // clear list
+  var list = document.getElementById("words");
+  while (list.firstChild) {
+    list.removeChild(list.firstChild);
+  }
+  // load items
   var transaction = db.transaction([store_name], "readonly");
   var objectStore = transaction.objectStore(store_name);
   var cursor = objectStore.openCursor();
-  cursor.onsuccess = function(e) {
-    var res = e.target.result;
-    if(res) {
-        var list = document.getElementById("words");
-        var div = document.createElement("div");
-        div.textContent = res.value.text;
-        list.appendChild(div);
-        res.continue();
-    }
-  }
+  cursor.onsuccess = buildItem;
 }
 
-document.addEventListener("DOMContentLoaded", function(){
- initDb(function(){
-   addData();
- });
-},false);
+function logIt(e){
+  console.log(e);
+}
 
+function getWord(id, callback){
+  var trans = db.transaction([store_name], "readwrite");
+  var store = trans.objectStore(store_name);
+  var request = store.get(parseInt(id));
+  request.onsuccess = function(e) {
+    callback(e.target.result);
+  };
+  request.onerror = logIt;
+}
+
+function deleteItem(e){
+  var id = e.target.getAttribute('data-id');
+  var trans = db.transaction([store_name], "readwrite");
+  var store = trans.objectStore(store_name);
+  var request = store.delete(parseInt(id));
+  trans.oncomplete = function(e) {
+    readData();
+    setCount();
+  };
+  request.onerror = logIt;
+}
+
+function saveChanges(e, callback){
+  var id = e.target.getAttribute('data-id');
+  var text = e.target.innerHTML;
+  getWord(id, function(data){
+		data.text = text;
+    var trans = db.transaction([store_name], "readwrite");
+    var store = trans.objectStore(store_name);
+    var request = store.put(data);
+    request.onsuccess = function(e){
+      console.log(e);
+      if(callback) { callback(data); };
+    };
+    request.onerror = logIt;
+  })
+}
+
+function buildItem(e){
+  var res = e.target.result;
+  if(res) {
+      var list = document.getElementById("words");
+      var div = document.createElement("div");
+      var container = document.createElement("div");
+      var a = document.createElement("a");
+      a.setAttribute("data-id", res.key);
+      a.setAttribute("href", '#');
+      a.addEventListener("click", deleteItem);
+      a.textContent = "delete";
+      div.textContent = res.value.text;
+      div.setAttribute("contenteditable", "true");
+      div.setAttribute("data-id", res.key);
+      div.addEventListener("input", saveChanges, false);
+      container.appendChild(a);
+      container.appendChild(div);
+      container.className = "words-item";
+      list.appendChild(container);
+      res.continue();
+  }
+}
+// will set counter
+document.addEventListener("DOMContentLoaded", function(){
+  initDb(function(){ /*empty*/ });
+},false);

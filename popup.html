@@ -4,25 +4,40 @@
     <title>Saved messages</title>
     <style>
       body {
-        min-width: 357px;
-        overflow-x: hidden;
+        min-width: 350px;
+        min-height: 200px;
       }
-      img {
-        margin: 5px;
-        border: 2px solid black;
-        vertical-align: middle;
-        width: 75px;
-        height: 75px;
+      #words{
+        width: 350px;
+        height: 400px;
+        overflow-x: scroll;
       }
+			.words-item { 
+				clear: both; 
+				border-bottom: 1px solid #CFCFCF;
+				padding: 4px 0 0 0;
+			}
+			.words-item div{
+				padding: 0 0 0 10px;
+				width:290px;
+			}
+			.words-item a{
+				float: right;
+				width: 45px;
+			}
     </style>
-		<div id="words">
-			
-		</div>
-		test
-		<script src="lib.js"></script>
-		<script src="popup.js"></script>
+    <script src="lib.js"></script>
+    <script src="popup.js"></script>
   </head>
   <body>
+    <div id="words">
+      
+      <div class="words-item">
+        <div>text</div>
+        <a href="#">[delete]</a>
+      </div>
+      
+    </div>
   </body>
 </html>
 
