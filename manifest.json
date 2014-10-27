@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Unknown words",
-  "description": "This extension demonstrates some stupid things",
+  "description": "This extension save notes using context menu",
   "version": "0.0.1",
   "background": {
     "scripts": ["main.js", "lib.js"],
@@ -20,6 +20,8 @@
     "tabs"
   ],
   "icons": {
-    "16": "16x16_icon.png"
+    "16": "16x16_icon.png",
+    "48": "48x48_icon.png",
+    "128": "128x128_icon.png"
   }
 }
