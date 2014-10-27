@@ -16,9 +16,10 @@
     "contextMenus",
     "unlimitedStorage",
     "storage",
-    "browsingData"
-	],
-	"icons": {
+    "browsingData",
+    "tabs"
+  ],
+  "icons": {
     "16": "16x16_icon.png"
-	}
+  }
 }

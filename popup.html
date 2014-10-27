@@ -12,31 +12,71 @@
         height: 400px;
         overflow-x: scroll;
       }
-			.words-item { 
-				clear: both; 
-				border-bottom: 1px solid #CFCFCF;
-				padding: 4px 0 0 0;
+      .words-item { 
+        clear: both; 
+        line-height: 25px;
+        border-bottom: 1px solid #FFF;
+      }
+      .words-item:hover{
+        background-color: #E5E4E2;
+        border-bottom: 1px solid #98AFC7;
+      }
+      .words-item div{
+        padding: 0 0 0 10px;
+        width:290px;
+        line-height: 25px;
+      }
+      .words-item a{
+        padding: 0 0 0 5px;
+        float: right;
+        width: 45px;
+        text-decoration: none;
+      }
+      .words-item a:hover{
+        background-color: #38ACEC;
+      }
+      .file-name{
+        width: 100px;
+      }
+      .label{
+        color: #AFAFAF;
+      }
+      .download-btn{
+        padding: 3px 10px 3px 10px;
+        cursor:pointer;
+      }
+      .download-btn:hover{
+        background-color: #38ACEC;
+      }
+			.download-container{
+				border-top: 1px solid #38ACEC;
+				line-height: 35px;
 			}
-			.words-item div{
-				padding: 0 0 0 10px;
-				width:290px;
-			}
-			.words-item a{
-				float: right;
-				width: 45px;
+			.header-container{
+/*				border-bottom: 1px solid #38ACEC;*/
+				height: 5px;
 			}
     </style>
     <script src="lib.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
+		<div class="header-container">
+			
+		</div>
     <div id="words">
-      
+      <!-- this will be deleted -->
       <div class="words-item">
         <div>text</div>
-        <a href="#">[delete]</a>
+        <a href="#">delete</a>
       </div>
-      
+      <!-- this will be deleted -->
+    </div>
+    <div class="download-container">
+      <span class="label">Download as file:</span>
+      <input type="text" id="file-name"/>
+      <span id="download-link-txt" class="download-btn">.txt</span>
+      <span id="download-link-csv" class="download-btn">.csv</span>
     </div>
   </body>
 </html>
