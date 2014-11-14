@@ -18,7 +18,9 @@
     "unlimitedStorage",
     "storage",
     "browsingData",
-    "tabs"
+    "tabs",
+    "alarms",
+    "notifications"
   ],
   "icons": {
     "16": "assets/images/16x16_icon.png",

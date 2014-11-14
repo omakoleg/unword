@@ -6,10 +6,8 @@ chrome.contextMenus.create({
 
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
   if (info.menuItemId === "unword-context") { 
-    unword.initDb(function(){
-      unword.addData(info['selectionText'], info['pageUrl'], function(){
-      	unword.setBadgeCount();
-      });
+    Unword.Storage.addWord(info['selectionText'], info['pageUrl'], function(){
+      Unword.Badge.update();
     });
   }
 });
@@ -19,5 +17,8 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 });
 
 document.addEventListener("DOMContentLoaded", function(){
-  unword.initDb(function(){ /*empty*/ });
+  Unword.Notification.register();
+  // Unword.Tick.run();
+  // Unword.Notification.show('Started');
+  Unword.Badge.update();
 }, false);
