@@ -9,7 +9,7 @@ var unwordPopup = {
   },
   attachDownloadHandler: function(){
     document.getElementById('download-link-txt').addEventListener("click", function(e){
-      unword.downloadFile('txt', document.getElementById('file-name').getAttribute('value'));
+      // unword.downloadFile('txt', document.getElementById('file-name').getAttribute('value'));
     });
     document.getElementById('download-link-csv').addEventListener("click", function(e){
       unword.downloadFile('csv', document.getElementById('file-name').getAttribute('value'));

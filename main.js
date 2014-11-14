@@ -14,6 +14,10 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
   }
 });
 
+chrome.browserAction.onClicked.addListener(function(tab) {
+  chrome.tabs.create({ url: "assets/html/window.html" });
+});
+
 document.addEventListener("DOMContentLoaded", function(){
   unword.initDb(function(){ /*empty*/ });
 }, false);
