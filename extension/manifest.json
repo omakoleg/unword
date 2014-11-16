@@ -6,7 +6,7 @@
   "background": {
     "scripts": [
       "main.js", 
-      "lib.js"
+      "assets/js/lib.js"
     ],
     "persistent": false
   },
