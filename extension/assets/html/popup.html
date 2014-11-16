@@ -3,82 +3,60 @@
   <head>
     <title>Saved messages</title>
     <style>
+      *{
+        color: #274245;
+      }
       body {
-        min-width: 350px;
+        min-width: 450px;
         min-height: 200px;
+        padding: 10px;
       }
-      #words{
-        width: 350px;
-        height: 400px;
-        overflow-x: scroll;
+      .header-actions{ 
+        padding: 10px 0 0 0;
+        height: 50px;
       }
-      .words-item { 
-        clear: both; 
-        line-height: 25px;
-        border-bottom: 1px solid #FFF;
+      .spacer{
+        height: 40px;
       }
-      .words-item:hover{
-        background-color: #E5E4E2;
-        border-bottom: 1px solid #98AFC7;
-      }
-      .words-item div{
-        padding: 0 0 0 10px;
-        width:290px;
-        line-height: 25px;
-      }
-      .words-item a{
-        padding: 0 0 0 5px;
-        float: right;
-        width: 45px;
-        text-decoration: none;
-      }
-      .words-item a:hover{
-        background-color: #38ACEC;
-      }
-      .file-name{
-        width: 100px;
-      }
-      .label{
-        color: #AFAFAF;
-      }
-      .download-btn{
-        padding: 3px 10px 3px 10px;
-        cursor:pointer;
-      }
-      .download-btn:hover{
-        background-color: #38ACEC;
-      }
-			.download-container{
-				border-top: 1px solid #38ACEC;
-				line-height: 35px;
-			}
-			.header-container{
-/*				border-bottom: 1px solid #38ACEC;*/
-				height: 5px;
-			}
     </style>
-    <script src="assets/js/lib.js"></script>
-    <script src="popup.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" media="all" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="../js/lib.js"></script>
+    <script src="../js/popup.js"></script>
   </head>
   <body>
-		<div class="header-container">
-			
-		</div>
-    <div id="words">
-      <!-- this will be deleted -->
-      <div class="words-item">
-        <div>text</div>
-        <a href="#">delete</a>
+    <div class="header-actions">
+      <div class="pull-left">
+        <span class="label label-success">10</span>
+        <span class="label label-danger">2</span>
+        <span class="label label-default">20</span>
       </div>
-      <!-- this will be deleted -->
+      <div class="btn-group pull-right" role="group">
+        <button type="button" class="btn btn-xs btn-info">work</button>
+        <button type="button" class="btn btn-xs btn-default">import</button>
+        <button type="button" class="btn btn-xs btn-default">options</button>
+  		</div>
     </div>
-    <div class="download-container">
-      <span class="label">Download as file:</span>
-      <input type="text" id="file-name"/>
-      <span id="download-link-txt" class="download-btn">.txt</span>
-      <span id="download-link-csv" class="download-btn">.csv</span>
+    <div>
+      <blockquote>
+        <p>Some word</p>
+        <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+      </blockquote>
     </div>
+    <form role="form">
+      <div class="form-group">
+        <textarea class="form-control" id="answer" placeholder="Write answer and hit enter"></textarea>
+        <p class="help-block">
+          <small><em>
+            Submitting wrong / empty answer will show correct one
+          </em></small>
+        </p>
+      </div>
+      <div class="pull-right">
+        <button class="btn btn-info">Check answer</button>
+      </div>
+    </form>
+    <div class="spacer"></div>
   </body>
 </html>
 
