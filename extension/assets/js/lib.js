@@ -1,4 +1,4 @@
-var Unword = {}
+var Unword = Unword || {};
 
 Unword.Notification = (function () {
   var module = {};
@@ -51,7 +51,7 @@ Unword.Badge = (function () {
 Unword.Storage = (function () {
   var module = {
     db: null, // connection
-    database_version: 12,
+    database_version: 13,
     database_name: 'words-database',
     store_name: 'words4'
   };
@@ -61,7 +61,7 @@ Unword.Storage = (function () {
   module.onupgradeneeded = function(e) {
     var db = e.target.result;
     if(!db.objectStoreNames.contains(module.store_name)) {
-      thisDB.createObjectStore(module.store_name, { 
+      db.createObjectStore(module.store_name, { 
         keyPath: 'id', 
         autoIncrement: true 
       });
@@ -99,11 +99,10 @@ Unword.Storage = (function () {
       };
     });
   }
-  module.addWord = function(text, web, callback){
+  module.addWord = function(text, callback){
     module.transaction('readwrite', function(transaction, store){
       var request = store.add({
-        text: text,
-        web: web
+        text: text
       });
       request.onerror = module.logError;
       request.onsuccess = function(e) { if(callback) { callback(); }; }
@@ -260,13 +259,13 @@ var unword = {
       }, unword.logError);
     }, unword.logError);
   },
-  cleanPopup: function(){
-    // clear list
-    var list = document.getElementById("words");
-    while (list.firstChild) {
-      list.removeChild(list.firstChild);
-    }
-  },
+//   cleanPopup: function(){
+//     // clear list
+//     // var list = document.getElementById("words");
+// //     while (list.firstChild) {
+// //       list.removeChild(list.firstChild);
+// //     }
+//   },
   // readData: function(callback){
   //   unword.cleanPopup();
   //   // load items

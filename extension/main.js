@@ -6,7 +6,7 @@ chrome.contextMenus.create({
 
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
   if (info.menuItemId === "unword-context") { 
-    Unword.Storage.addWord(info['selectionText'], info['pageUrl'], function(){
+    Unword.Storage.addWord(info['selectionText'], function(){
       Unword.Badge.update();
     });
   }
