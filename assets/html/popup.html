@@ -18,44 +18,84 @@
       .spacer{
         height: 40px;
       }
+      .vocabularies-list{
+        padding: 10px 0 0 0;
+        max-height: 400px;
+        overflow: scroll;
+      }
+      .vocabularies-list .list-group{
+        padding: 10px;
+      }
     </style>
     <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" media="all" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <script src="../js/lib.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/notification.js"></script>
+    <script src="../js/models.js"></script>
     <script src="../js/popup.js"></script>
   </head>
   <body>
-    <div class="header-actions">
-      <div class="pull-left">
-        <span class="label label-success">10</span>
-        <span class="label label-danger">2</span>
-        <span class="label label-default">20</span>
-      </div>
-      <div class="btn-group pull-right" role="group">
-        <button type="button" class="btn btn-xs btn-info">work</button>
-        <button type="button" class="btn btn-xs btn-default">import</button>
-        <button type="button" class="btn btn-xs btn-default">options</button>
-  		</div>
-    </div>
     <div>
-      <blockquote>
-        <p>Some word</p>
-        <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-      </blockquote>
+      <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
+          </li>
+          <li role="presentation">
+            <a href="#vocabularies" aria-controls="profile" role="tab" data-toggle="tab">Vocabularies</a>
+          </li>
+          <li role="presentation">
+            <a href="#settings" aria-controls="messages" role="tab" data-toggle="tab">Settings</a>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">
+            <!-- main -->
+            <div class="pull-right">
+              <span class="label label-success">10</span>
+              <span class="label label-danger">2</span>
+              <span class="label label-default">20</span>
+            </div>
+            <br/>
+            <div>
+              <blockquote>
+                <p>Some word</p>
+                <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+            <form role="form">
+              <div class="form-group">
+                <textarea class="form-control" id="answer" 
+                  placeholder="Write answer and hit enter"></textarea>
+                <p class="help-block">
+                  <small><em>
+                    Submitting wrong / empty answer will show correct one
+                  </em></small>
+                </p>
+              </div>
+              <div class="pull-right">
+                <button class="btn btn-info">Check answer</button>
+              </div>
+            </form>
+            <!-- main -->
+          </div>
+          <div role="tabpanel" class="tab-pane" id="vocabularies">
+            <div class="vocabularies-list">
+              <ul class="list-group tmpl-holder">
+                <!-- here will be vocabularies list -->
+              </ul>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="settings">
+            settings
+          </div>
+        </div>
+
+      </div>
     </div>
-    <form role="form">
-      <div class="form-group">
-        <textarea class="form-control" id="answer" placeholder="Write answer and hit enter"></textarea>
-        <p class="help-block">
-          <small><em>
-            Submitting wrong / empty answer will show correct one
-          </em></small>
-        </p>
-      </div>
-      <div class="pull-right">
-        <button class="btn btn-info">Check answer</button>
-      </div>
-    </form>
     <div class="spacer"></div>
   </body>
 </html>

@@ -1,12 +1,14 @@
 {
   "manifest_version": 2,
   "name": "Unknown words",
-  "description": "This extension save notes using context menu",
-  "version": "0.0.2",
+  "description": "Helps to learn words",
+  "version": "0.0.3",
   "background": {
     "scripts": [
-      "main.js", 
-      "assets/js/lib.js"
+      "assets/js/storage.js",
+      "assets/js/notification.js",
+      "assets/js/models.js",
+      "main.js"
     ],
     "persistent": false
   },

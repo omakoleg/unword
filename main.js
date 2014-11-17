@@ -13,8 +13,26 @@
 // });
 
 document.addEventListener("DOMContentLoaded", function(){
-  Unword.Notification.register();
   // Unword.Tick.run();
   // Unword.Notification.show('Started');
   Unword.Badge.update();
+  
+  Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'test voc'}), function(id){
+    Unword.Storage.add('words', Unword.Models.Word.new({
+      vocabulary_id: id,
+      text: "cat",
+      example: "Cats rulls the world",
+      translation: "кот"
+    }));
+    Unword.Storage.add('words', Unword.Models.Word.new({
+      vocabulary_id: id,
+      text: "cow",
+      example: "Cow says mooo",
+      translation: "корова"
+    }));
+  });
+  
+//   Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'test voc 2'}));
+//   Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'test voc 3'}));
+//   Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'test voc 4'}));
 }, false);
