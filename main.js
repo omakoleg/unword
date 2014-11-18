@@ -15,7 +15,9 @@
 document.addEventListener("DOMContentLoaded", function(){
   // Unword.Tick.run();
   // Unword.Notification.show('Started');
-  Unword.Badge.update();
+  // Unword.Badge.update();
+  // indexedDB.deleteDatabase('words-database');
+  // indexedDB.deleteDatabase('words-database-2');
   
   Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'test voc'}), function(id){
     Unword.Storage.add('words', Unword.Models.Word.new({
@@ -29,6 +31,18 @@ document.addEventListener("DOMContentLoaded", function(){
       text: "cow",
       example: "Cow says mooo",
       translation: "корова"
+    }));
+    Unword.Storage.add('words', Unword.Models.Word.new({
+      vocabulary_id: id,
+      text: "rabbit",
+      example: "It says:die humans",
+      translation: "кролик"
+    }));
+    Unword.Storage.add('words', Unword.Models.Word.new({
+      vocabulary_id: id,
+      text: "Bender",
+      example: "It says:die humans, and it is not rabbit. Ha-ha-ha",
+      translation: "Бендер"
     }));
   });
   

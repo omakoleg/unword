@@ -29,7 +29,7 @@ Unword.Tick = (function () {
 Unword.Badge = (function () {
   var module = {};
   module.update = function(){
-    Unword.Storage.getCount('words', function(count){
+    Unword.Storage.count('vocabularies', { index: {name: "is_active", value: 1 }}, function(count){
       chrome.browserAction.setBadgeText({text: String(count)});
     })
   }

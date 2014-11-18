@@ -14,10 +14,12 @@ Unword.Storage = (function () {
     var db = e.target.result;
     if(!db.objectStoreNames.contains('words')) {
       console.log('update words');
-      db.createObjectStore('words', { 
+      var os = db.createObjectStore('words', { 
         keyPath: 'id', 
         autoIncrement: true 
       });
+      os.createIndex("vocabulary_id","vocabulary_id", { unique: false });
+      os.createIndex("vocabulary_id,is_completed",["vocabulary_id", "is_completed"], { unique: false });
     }
     if(!db.objectStoreNames.contains('vocabularies')) {
       console.log('update vocabularies');
@@ -50,12 +52,17 @@ Unword.Storage = (function () {
         module._tr(store_name, callback);
     }
   }
-    
-  module.getCount = function(store_name, callback){
+  module.count = function(store_name, options, callback){
     module.transaction(store_name, function(transaction, store){
-      var count = store.count();
-      count.onsuccess = function() {
-        callback(count.result);
+      var countRequest = null;
+      if(options.index){
+        indexer = store.index(options.index.name);
+        countRequest = indexer.count(options.index.value);
+      } else {
+        countRequest = store.count();
+      }
+      countRequest.onsuccess = function() {
+        callback(countRequest.result);
       };
     });
   }
@@ -63,17 +70,33 @@ Unword.Storage = (function () {
     module.transaction(store_name, function(transaction, store){
       var request = store.add(data);
       request.onerror = module.logError;
-      request.onsuccess = function(e) { if(callback) { callback(e.target.result); }; }
-    });
-  }
-  module.where = function(store_name, index_name, value, callback){
-    module.transaction(store_name, function(transaction, store){
-      var index = store.index(index_name);
-      var request = index.get(value);
-      request.onerror = module.logError;
       request.onsuccess = function(e) { 
         if(callback) { callback(e.target.result); }; 
       }
+    });
+  }
+  // use index to get list, without index will get all 
+  module.where = function(store_name, options, callback){
+    module.transaction(store_name, function(transaction, store){
+      var cursor = null;
+      if(options.index){
+        var indexer = store.index(options.index.name);
+        cursor = indexer.openCursor(options.index.value);
+      } else {
+        cursor = store.openCursor();
+      }
+      var data = [];
+      cursor.onerror = module.logError;
+      cursor.onsuccess = function(e){
+        var res = e.target.result;
+        if(res) {
+          data.push(res.value);
+          res.continue();
+        }
+      };
+      transaction.oncomplete = function(e) {
+        callback(data);
+      };
     });
   }
   module.get = function(store_name, id, callback){
@@ -90,7 +113,7 @@ Unword.Storage = (function () {
       var request = store.delete(parseInt(id));
       request.onerror = module.logError;
       trans.oncomplete = function(e) {
-        callback();
+        if(callback) { callback(); };
       };
     });
   }

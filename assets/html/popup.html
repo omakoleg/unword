@@ -20,8 +20,8 @@
       }
       .vocabularies-list{
         padding: 10px 0 0 0;
-        max-height: 400px;
-        overflow: scroll;
+        max-height: 385px;
+        overflow-y: scroll;
       }
       .vocabularies-list .list-group{
         padding: 10px;
@@ -43,45 +43,56 @@
             <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
           </li>
           <li role="presentation">
-            <a href="#vocabularies" aria-controls="profile" role="tab" data-toggle="tab">Vocabularies</a>
+            <a href="#vocabularies" aria-controls="vocabularies" role="tab" data-toggle="tab">Vocabularies</a>
           </li>
           <li role="presentation">
-            <a href="#settings" aria-controls="messages" role="tab" data-toggle="tab">Settings</a>
+            <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
           </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
+          <!-- tab pane -->
           <div role="tabpanel" class="tab-pane active" id="home">
-            <!-- main -->
-            <div class="pull-right">
-              <span class="label label-success">10</span>
-              <span class="label label-danger">2</span>
-              <span class="label label-default">20</span>
-            </div>
-            <br/>
-            <div>
-              <blockquote>
-                <p>Some word</p>
-                <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-              </blockquote>
-            </div>
-            <form role="form">
-              <div class="form-group">
-                <textarea class="form-control" id="answer" 
-                  placeholder="Write answer and hit enter"></textarea>
-                <p class="help-block">
-                  <small><em>
-                    Submitting wrong / empty answer will show correct one
-                  </em></small>
-                </p>
+            <div class="no-vocabularies hidden">
+              <br/>
+              <div class="alert alert-warning" role="alert">
+                No active vocabularies found. Activate at least one at <b>Vocabularies</b> tab. Vocabulary should have words inside.
               </div>
+            </div>
+            <div class="words-container">
+              <!-- main -->
               <div class="pull-right">
-                <button class="btn btn-info">Check answer</button>
+                <span class="label label-success count-answers">0</span>
+                <span class="label label-default count-all">0</span>
+                <span class="label label-default vocabulary-name">-</span>
               </div>
-            </form>
-            <!-- main -->
+              <br/>
+              <div>
+                <blockquote>
+                  <p id="word-text">Some word</p>
+                  <footer id="word-example">Some word explanaiton to understand context</footer>
+                </blockquote>
+              </div>
+              <div role="form">
+                <div class="form-group">
+                  <input type="hidden" id="word-id"/>
+                  <textarea class="form-control" id="word-answer"></textarea>
+                  <p class="help-block">
+                    <small><em>
+                      Submitting wrong / empty answer will show answer. 
+                      To continue press enter or button
+                    </em></small>
+                  </p>
+                </div>
+                <div class="pull-right">
+                  <button class="btn btn-info" id="word-submit">Check answer / next</button>
+                </div>
+              </div>
+              <!-- main -->
+            </div>
           </div>
+          <!-- tab pane -->
           <div role="tabpanel" class="tab-pane" id="vocabularies">
             <div class="vocabularies-list">
               <ul class="list-group tmpl-holder">
@@ -89,8 +100,12 @@
               </ul>
             </div>
           </div>
+          <!-- tab pane -->
           <div role="tabpanel" class="tab-pane" id="settings">
-            settings
+            <br/>
+            <div class="alert alert-warning" role="alert">
+              Not implemented
+            </div>
           </div>
         </div>
 
