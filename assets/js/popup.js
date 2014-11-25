@@ -2,16 +2,16 @@ var Unword = Unword || {};
 
 Unword.Popup = (function () {
   var module = {
-    word: null,
+    question: null,
     accept_answer: true
   };
   module.init = function(){
-    module.tabWords(); // default tab
-    module.attachWordHandlers();    
+    module.tabQuestions(); // default tab
+    module.attachQuestionHandlers();    
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var tab = $(e.target).attr('aria-controls');
       if(tab == 'home'){
-        module.tabWords();
+        module.tabQuestions();
       } else if(tab == 'vocabularies'){
         module.tabVocabularies();
       } else {
@@ -48,7 +48,7 @@ Unword.Popup = (function () {
           });
           $(".tmpl-holder").append(tmpl);
         });
-        Unword.Storage.count('words', { index: { name: 'vocabulary_id', value: elem.id }}, function(cnt){
+        Unword.Storage.count('questions', { index: { name: 'vocabulary_id', value: elem.id }}, function(cnt){
           dfd.resolve(cnt);
         });
       });
@@ -59,90 +59,84 @@ Unword.Popup = (function () {
       data.is_active = data.is_active ? 0 : 1;
       Unword.Storage.update('vocabularies', data, function(){
         module.tabVocabularies();
-        Unword.Badge.update();
+        // Unword.Badge.update();
       });
     });
   }
   
-  module.attachWordHandlers = function(){
-    $("#word-answer").on('keydown', function(e){
+  module.attachQuestionHandlers = function(){
+    $("#question-answer").on('keydown', function(e){
       var keycode = (e.keyCode ? e.keyCode : e.which);
       if(keycode == '13'){
         e.preventDefault();
-        module.submitWord();
+        module.submitQuestion();
       }
-    });
-    $("#word-submit").on('click', function(e){
-      e.preventDefault();
-      module.submitWord();
     });
   }
   
   module.updateCounters = function(is_answered, callback){
     var cb = function(){ if(callback){ callback(); }}
-    if(!module.word.count_answers) { module.word.count_answers = 0; }
-    module.word.count_answers += is_answered ? 1 : -1;
-    console.log(module.word.count_answers);
-    //remove word
-    if(module.word.count_answers >= 10) {
-      module.word.is_completed = 1;
+    if(!module.question.count_answers) { module.question.count_answers = 0; }
+    module.question.count_answers += is_answered ? 1 : -1;
+    //remove question
+    if(module.question.count_answers >= 10) {
+      module.question.is_completed = 1;
     }
     // co not move below zero
-    if(module.word.count_answers < 0){
-      module.word.count_answers = 0;
+    if(module.question.count_answers < 0){
+      module.question.count_answers = 0;
     }
-    Unword.Storage.update('words', module.word, cb); 
+    Unword.Storage.update('questions', module.question, cb); 
   }
     
-  module.submitWord = function(){
+  module.submitQuestion = function(){
     if(module.accept_answer){
       
-      var answer = $("#word-answer").val();
-      console.log(answer);
-      console.log(module.word.translation);
+      var answer = $("#question-answer").val();
       // show message or load next
-      if(answer != module.word.translation){
+      if(answer != module.question.answer){
         module.accept_answer = false;
-        var text = $("<strong>")
-        text.html("  (" + module.word.translation + ")");
-        $("#word-text").append(text);
+        $(".answer-elements").removeClass('hidden');
+        $("#answer").html(module.question.answer);
+        $("#answer-explain").html(module.question.answer_explain);
         module.updateCounters(false);
       } else{
         module.updateCounters(true, function(){
-          module.tabWords();
+          module.tabQuestions();
         });
       }
     } else {
       // load next
-      module.tabWords();
+      module.tabQuestions();
     }
   }
   
-  module.tabWords = function(){
+  module.tabQuestions = function(){
     // clean answer
     // turn accept
     // hide message
-    $("#word-answer").val('');
+    $("#question-answer").val('');
+    $(".answer-elements").addClass('hidden').val('');
     module.accept_answer = true;
-    // search for random word in random active vocabulary
+    // search for random question in random active vocabulary
     Unword.Models.Vocabulary.getRandomActive(function(vocabulary){
       if(vocabulary){
-        $(".words-container").removeClass('hidden');
+        $(".questions-container").removeClass('hidden');
         $(".no-vocabularies").addClass('hidden');
         $(".vocabulary-name").html(vocabulary.name);
-        Unword.Models.Word.getActiveByVocabularyId(vocabulary.id, function(words){
-          $(".count-all").html(words.length);
-          if(words.length == 0){
-            console.log('no words in vocabulary'); 
+        Unword.Models.Question.getActiveByVocabularyId(vocabulary.id, function(questions){
+          $(".count-all").html(questions.length);
+          if(questions.length == 0){
+            console.log('no questions in vocabulary'); 
           } else {
-            module.word = Unword.Util.arrayRandom(words);
-            $("#word-text").html(module.word.text);
-            $("#word-example").html(module.word.example);
-            $(".count-answers").html(module.word.count_answers);
+            module.question = Unword.Util.arrayRandom(questions);
+            $("#question-text").html(module.question.question);
+            $("#question-explain").html(module.question.question_explain);
+            $(".count-answers").html(module.question.count_answers);
           }
         });
       } else {
-        $(".words-container").addClass('hidden');
+        $(".questions-container").addClass('hidden');
         $(".no-vocabularies").removeClass('hidden');
       }
     });
@@ -153,6 +147,6 @@ Unword.Popup = (function () {
 $(function(){
   Unword.Popup.init();
   setTimeout(function(){
-    $("#word-answer").focus();
+    $("#question-answer").focus();
   }, 300);
 });

@@ -1,7 +1,7 @@
 # About
 Chrome extension to store selected chunks of text to indexedDb. 
 
-List of words could be viewed in extension popup.
+List of questions could be viewed in extension popup.
 
 # License
 

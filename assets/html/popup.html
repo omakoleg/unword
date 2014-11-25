@@ -7,7 +7,7 @@
         color: #274245;
       }
       body {
-        min-width: 450px;
+        min-width: 550px;
         min-height: 200px;
         padding: 10px;
       }
@@ -57,10 +57,10 @@
             <div class="no-vocabularies hidden">
               <br/>
               <div class="alert alert-warning" role="alert">
-                No active vocabularies found. Activate at least one at <b>Vocabularies</b> tab. Vocabulary should have words inside.
+                No active vocabularies found. Activate at least one at <b>Vocabularies</b> tab. Vocabulary should have questions inside.
               </div>
             </div>
-            <div class="words-container">
+            <div class="questions-container">
               <!-- main -->
               <div class="pull-right">
                 <span class="label label-success count-answers">0</span>
@@ -70,23 +70,22 @@
               <br/>
               <div>
                 <blockquote>
-                  <p id="word-text">Some word</p>
-                  <footer id="word-example">Some word explanaiton to understand context</footer>
+                  <p id="question-text">Some question</p>
+                  <p id="answer" class="hidden answer-elements"></p>
+                  <footer id="question-example">Some question explanaiton to understand context</footer>
+                  <footer id="answer-explain" class="hidden answer-elements">Some explanation</footer>
                 </blockquote>
               </div>
               <div role="form">
                 <div class="form-group">
-                  <input type="hidden" id="word-id"/>
-                  <textarea class="form-control" id="word-answer"></textarea>
+                  <input type="hidden" id="question-id"/>
+                  <textarea class="form-control" rows="5" id="question-answer"></textarea>
                   <p class="help-block">
                     <small><em>
                       Submitting wrong / empty answer will show answer. 
-                      To continue press enter or button
+                      To continue press enter
                     </em></small>
                   </p>
-                </div>
-                <div class="pull-right">
-                  <button class="btn btn-info" id="word-submit">Check answer / next</button>
                 </div>
               </div>
               <!-- main -->
@@ -105,13 +104,18 @@
             <br/>
             <div class="alert alert-warning" role="alert">
               Not implemented
+              <div>
+                Count answers to complete : 10
+              </div>
+              <div>
+                Do not decrease count of ansers below zero
+              </div>
             </div>
           </div>
         </div>
 
       </div>
     </div>
-    <div class="spacer"></div>
   </body>
 </html>
 

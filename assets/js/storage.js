@@ -4,7 +4,7 @@ Unword.Storage = (function () {
   var module = {
     db: null, // connection
     database_version: 1,
-    database_name: 'words-database'
+    database_name: 'questions-database'
   };
   module.logError = function(e){ 
     console.log(e); 
@@ -12,9 +12,8 @@ Unword.Storage = (function () {
   module.onupgradeneeded = function(e) {
     console.log('upgraded');
     var db = e.target.result;
-    if(!db.objectStoreNames.contains('words')) {
-      console.log('update words');
-      var os = db.createObjectStore('words', { 
+    if(!db.objectStoreNames.contains('questions')) {
+      var os = db.createObjectStore('questions', { 
         keyPath: 'id', 
         autoIncrement: true 
       });

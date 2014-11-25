@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Unknown words",
-  "description": "Helps to learn words",
+  "description": "Helps to learn words by asking questions",
   "version": "0.0.3",
   "background": {
     "scripts": [

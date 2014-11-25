@@ -12,22 +12,21 @@ Unword.Util = {
 }
 
 Unword.Models = {};
-Unword.Models.Word = (function () {
+Unword.Models.Question = (function () {
   var module = { }
   module.new = function(data){
     return {
-      text: data.text,
       vocabulary_id: data.vocabulary_id,
-      example: data.example || "",
-      language: data.language || 'en',
-      language_to: data.language_to || 'ru',
-      translation: data.translation || "",
+      question: data.question,
+      question_explain: data.question_explain,
+      answer: data.answer,
+      answer_explain: data.answer_explain || "",
       is_completed: data.is_completed || 0,
       count_answers: 0
     }
   }
   module.getActiveByVocabularyId = function(vocabulary_id, cb){
-    Unword.Storage.where('words', { index: {
+    Unword.Storage.where('questions', { index: {
       name: 'vocabulary_id,is_completed', 
       value: [vocabulary_id, 0]
     }}, function(data){
