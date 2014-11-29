@@ -8,78 +8,15 @@ Unword.Popup = (function () {
   module.init = function(){
     module.tabQuestions(); // default tab
     module.attachQuestionHandlers();    
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      var tab = $(e.target).attr('aria-controls');
-      if(tab == 'home'){
-        module.tabQuestions();
-      } else if(tab == 'vocabularies'){
-        module.tabVocabularies();
-      } else {
-        //settings tab
-      }
-    });
     // set focus
     setTimeout(function(){
       $("#question-answer").focus();
     }, 300);
+    
+    $(".func-settings").on('click', function(){
+      chrome.tabs.create({'url': chrome.extension.getURL('assets/html/background.html')});
+    });
   }  
-  
-  module.vocabularyTemplate = function(data){
-    return $("<li class='list-group-item' data-id='"+ data.id + "'> \
-      <button class='btn btn-xs btn-danger func-remove'>remove</button>\
-      <span class='badge'>" + data.count + "</span> \
-      <button class=\"btn btn-xs btn-default func-download\">download</button> \
-      <button class='btn btn-xs func-activate " + data.active_class +"'>" + data.active_label +"</button> \
-      " + data.name + " \
-    </li>");
-  }
-  module.tabVocabularies = function(){
-    // should be lazy loaded
-    $(".tmpl-holder").html("");
-    $(".func-add-vocabulary").on('click', function(){
-      chrome.tabs.create({'url': chrome.extension.getURL('assets/html/background.html') });
-    });
-    Unword.Storage.readAll('vocabularies', function(list){
-      $.each(list, function(i, elem){
-        var dfd = $.Deferred().done(function(cnt){
-          var data = {
-            id: elem.id,
-            name: elem.name,
-            count: cnt,
-            active_label: elem.is_active ? 'active' : 'activate',
-            active_class: elem.is_active ? 'btn-info' : ''
-          };
-          var tmpl = module.vocabularyTemplate(data);
-          tmpl.find(".func-activate").on('click', function(e){
-            module.toggleVocabulary($(e.target).parent().data('id'));
-          });
-          tmpl.find(".func-download").on('click', function(e){
-            Unword.Files.downloadVocabulary($(e.target).parent().data('id'));
-          });
-          tmpl.find(".func-remove").on('click', function(e){
-            $(e.target).attr('disabled','disabled');
-            $(e.target).html('wait ...');
-            Unword.Models.Vocabulary.deleteRecursive($(e.target).parent().data('id'), function(){
-              module.tabVocabularies();
-            });
-          });
-          $(".tmpl-holder").append(tmpl);
-        });
-        Unword.Storage.count('questions', { index: { name: 'vocabulary_id', value: elem.id }}, function(cnt){
-          dfd.resolve(cnt);
-        });
-      });
-    });
-  }
-  module.toggleVocabulary = function(id){
-    Unword.Storage.get('vocabularies', id, function(data){
-      data.is_active = data.is_active ? 0 : 1;
-      Unword.Storage.update('vocabularies', data, function(){
-        module.tabVocabularies();
-        // Unword.Badge.update();
-      });
-    });
-  }
   
   module.attachQuestionHandlers = function(){
     $("#question-answer").on('keydown', function(e){

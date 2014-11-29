@@ -19,21 +19,22 @@ document.addEventListener("DOMContentLoaded", function(){
   // indexedDB.deleteDatabase('questions-database');
   // indexedDB.deleteDatabase('questions-database-2');
   
-  // Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'week days test'}), function(id){
-  //   Unword.Storage.add('questions', Unword.Models.Question.new({
-  //     vocabulary_id: id,
-  //     question: "How many days in a week",
-  //     question_explain: "Regular week, just it",
-  //     answer: '7',
-  //     answer_explain: "Week have 7 days"
-  //   }));
-  //   Unword.Storage.add('questions', Unword.Models.Question.new({
-  //     vocabulary_id: id,
-  //     question: "How many days in a week + 1",
-  //     question_explain: "Regular week, just plus one",
-  //     answer: '8',
-  //     answer_explain: "Week have 7 days + 1 = 8"
-  //   }));
+  Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'week days test'}), function(id){
+    Unword.Storage.add('questions', Unword.Models.Question.new({
+      vocabulary_id: id,
+      question: "How many days in a week",
+      question_explain: "Regular week, just it",
+      answer: '7',
+      answer_explain: "Week have 7 days"
+    }));
+    Unword.Storage.add('questions', Unword.Models.Question.new({
+      vocabulary_id: id,
+      question: "How many days in a week + 1",
+      question_explain: "Regular week, just plus one",
+      answer: '8',
+      answer_explain: "Week have 7 days + 1 = 8"
+    }));
+    console.log('test');
   //   
-  // });
+  });
 }, false);

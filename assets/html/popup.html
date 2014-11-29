@@ -35,89 +35,50 @@
     <script src="../js/models.js"></script>
     <script src="../js/files.js"></script>
     <script src="../js/popup.js"></script>
-    <script src="../js/pages/popup-page.js"></script>
+    <script src="../js/popup-page.js"></script>
   </head>
   <body>
-    <div>
-      <div role="tabpanel">
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active">
-            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
-          </li>
-          <li role="presentation">
-            <a href="#vocabularies" aria-controls="vocabularies" role="tab" data-toggle="tab">Vocabularies</a>
-          </li>
-          <li role="presentation">
-            <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
-          </li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <!-- tab pane -->
-          <div role="tabpanel" class="tab-pane active" id="home">
-            <div class="no-vocabularies hidden">
-              <br/>
-              <div class="alert alert-warning" role="alert">
-                No active vocabularies found. Activate at least one at <b>Vocabularies</b> tab. Vocabulary should have questions inside.
-              </div>
-            </div>
-            <div class="questions-container">
-              <!-- main -->
-              <div class="pull-right">
-                <span class="label label-success count-answers">0</span>
-                <span class="label label-default count-all">0</span>
-                <span class="label label-default vocabulary-name">-</span>
-              </div>
-              <br/>
-              <div>
-                <blockquote>
-                  <p id="question-text">Some question</p>
-                  <p id="answer" class="hidden answer-elements"></p>
-                  <footer id="question-example">Some question explanaiton to understand context</footer>
-                  <footer id="answer-explain" class="hidden answer-elements">Some explanation</footer>
-                </blockquote>
-              </div>
-              <div role="form">
-                <div class="form-group">
-                  <input type="hidden" id="question-id"/>
-                  <textarea class="form-control" rows="5" id="question-answer"></textarea>
-                  <p class="help-block">
-                    <small><em>
-                      Submitting wrong / empty answer will show answer. 
-                      To continue press enter
-                    </em></small>
-                  </p>
-                </div>
-              </div>
-              <!-- main -->
-            </div>
-          </div>
-          <!-- tab pane -->
-          <div role="tabpanel" class="tab-pane" id="vocabularies">
-            <div class="vocabularies-list">
-              <ul class="list-group tmpl-holder">
-                <!-- here will be vocabularies list -->
-              </ul>
-            </div>
-            <button class="btn btn-xs btn-primary func-add-vocabulary">Add vocabulary</button>
-          </div>
-          <!-- tab pane -->
-          <div role="tabpanel" class="tab-pane" id="settings">
-            <br/>
-            <div class="alert alert-warning" role="alert">
-              Not implemented
-              <div>
-                Count answers to complete : 10
-              </div>
-              <div>
-                Do not decrease count of ansers below zero
-              </div>
-            </div>
-          </div>
+    <div class="no-vocabularies hidden">
+      <br/>
+      <div class="alert alert-warning" role="alert">
+        No active vocabularies found. Activate at least one at <b>Vocabularies</b> tab. Vocabulary should have questions inside.
+      </div>
+    </div>
+            
+    <div class="questions-container">
+      <!-- main -->
+      <div class="pull-right">
+        <span class="label label-success count-answers">0</span>
+        <span class="label label-default count-all">0</span>
+        <span class="label label-default vocabulary-name">-</span>
+      </div>
+      <br/>
+      <div>
+        <blockquote>
+          <p id="question-text">Some question</p>
+          <p id="answer" class="hidden answer-elements"></p>
+          <footer id="question-example">Some question explanaiton to understand context</footer>
+          <footer id="answer-explain" class="hidden answer-elements">Some explanation</footer>
+        </blockquote>
+      </div>
+      <div role="form">
+        <div class="form-group">
+          <input type="hidden" id="question-id"/>
+          <textarea class="form-control" rows="5" id="question-answer"></textarea>
+          <p class="help-block">
+            <small><em>
+              Submitting wrong / empty answer will show answer. 
+              To continue press enter
+            </em></small>
+          </p>
         </div>
       </div>
     </div>
+    
+    <div class="pull-right">
+      <button class="btn btn-default func-settings">settings</button>
+    </div>
+    
   </body>
 </html>
 

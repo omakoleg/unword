@@ -57,8 +57,8 @@ Unword.Models.Vocabulary = (function () {
         Unword.Storage.delete('questions', item.id, function(){
           def.resolve();
         });
-        return def;
-      })).then(function(){
+        return def.promise();
+      })).done(function(){
         Unword.Storage.delete('vocabularies', vacabularyId, function(){
           cb();
         });

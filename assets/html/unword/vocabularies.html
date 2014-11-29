@@ -1,0 +1,17 @@
+<div>
+  <button class="btn btn-xs btn-primary func-add-vocabulary">Add vocabulary</button>
+</div>
+<br/>
+<ul class="list-group">
+  <li ng-repeat="voc in vocabularies  track by $index" class="list-group-item">
+    <button class="btn btn-xs btn-danger" ng-click="remove(voc)">remove</button>
+    <span class="badge">{{voc.count}}</span> 
+    <button class="btn btn-xs btn-default func-download" ng-click="download(voc)">download</button>
+    <button class="btn btn-xs {{ voc.is_active ? 'btn-info' : 'btn-default' }}"
+      ng-click="activate(voc)">
+      {{voc.is_active ? 'active' : 'activate' }}
+    </button>
+    {{ voc.name }}
+  </li>
+</ul>
+
