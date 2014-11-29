@@ -1,5 +1,9 @@
 var Unword = Unword || {};
 
+Unword.logError = function(e){
+  console.log(e);
+}
+
 Unword.Util = {
   arrayRandom: function(arr){
     return arr[Math.floor(Math.random() * arr.length)]
@@ -43,6 +47,23 @@ Unword.Models.Vocabulary = (function () {
       name: data.name,
       is_active: data.is_active || 0
     }
+  }
+  // remove all questions and delete vocabulary. 
+  // delete empty vocabulary
+  module.deleteRecursive = function(vacabularyId, cb){
+    Unword.Models.Question.getActiveByVocabularyId(vacabularyId, function(questions){
+      $.when.apply($, $.map(questions, function(item) {
+        var def = new $.Deferred();
+        Unword.Storage.delete('questions', item.id, function(){
+          def.resolve();
+        });
+        return def;
+      })).then(function(){
+        Unword.Storage.delete('vocabularies', vacabularyId, function(){
+          cb();
+        });
+      });
+    });
   }
   module.getRandomActive = function(cb){
     Unword.Storage.where('vocabularies', {index: { name: "is_active", value: 1 }}, function(data){

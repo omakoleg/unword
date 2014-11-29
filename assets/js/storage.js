@@ -111,7 +111,7 @@ Unword.Storage = (function () {
     module.transaction(store_name, function(transaction, store){
       var request = store.delete(parseInt(id));
       request.onerror = module.logError;
-      trans.oncomplete = function(e) {
+      transaction.oncomplete = function(e) {
         if(callback) { callback(); };
       };
     });

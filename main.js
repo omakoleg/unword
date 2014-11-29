@@ -36,8 +36,4 @@ document.addEventListener("DOMContentLoaded", function(){
   //   }));
   //   
   // });
-  
-//   Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'test voc 2'}));
-//   Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'test voc 3'}));
-//   Unword.Storage.add('vocabularies', Unword.Models.Vocabulary.new({name: 'test voc 4'}));
 }, false);

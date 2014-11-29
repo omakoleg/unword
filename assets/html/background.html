@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" data-ng-app="unword" data-ng-csp="">
+  <head>
+    <title>Saved messages</title>
+    <style>
+      body {
+        padding: 10px;
+      }
+    </style>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../bower_components/angular/angular.js"></script>
+    <link rel="stylesheet" media="all" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="../js/storage.js"></script>
+    <script src="../js/notification.js"></script>
+    <script src="../js/models.js"></script>
+    <script src="../js/files.js"></script>
+    <script src="../js/pages/background-page.js"></script>
+  </head>
+  <body ng-controller="IndexController as indexCtrl">
+    
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="#">Vocabularies</a>
+            </li>
+            <li>
+              <a href="#">Config</a>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div ng-repeat="word in windowCtrl.words">
+            {{word.id}}: {{word.text}}
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      
+    </div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+$(function(){
+  Unword.Popup.init();
+});

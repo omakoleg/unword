@@ -18,20 +18,27 @@ Unword.Popup = (function () {
         //settings tab
       }
     });
+    // set focus
+    setTimeout(function(){
+      $("#question-answer").focus();
+    }, 300);
   }  
   
   module.vocabularyTemplate = function(data){
-    return $("<li class='list-group-item'> \
-      <a href='#' class='btn btn-xs btn-danger'>remove</a>\
+    return $("<li class='list-group-item' data-id='"+ data.id + "'> \
+      <button class='btn btn-xs btn-danger func-remove'>remove</button>\
       <span class='badge'>" + data.count + "</span> \
-      <button data-id='"+ data.id + "' \
-        class='btn btn-xs " + data.active_class +"'>" + data.active_label +"</button> \
+      <button class=\"btn btn-xs btn-default func-download\">download</button> \
+      <button class='btn btn-xs func-activate " + data.active_class +"'>" + data.active_label +"</button> \
       " + data.name + " \
     </li>");
   }
   module.tabVocabularies = function(){
     // should be lazy loaded
     $(".tmpl-holder").html("");
+    $(".func-add-vocabulary").on('click', function(){
+      chrome.tabs.create({'url': chrome.extension.getURL('assets/html/background.html') });
+    });
     Unword.Storage.readAll('vocabularies', function(list){
       $.each(list, function(i, elem){
         var dfd = $.Deferred().done(function(cnt){
@@ -43,8 +50,18 @@ Unword.Popup = (function () {
             active_class: elem.is_active ? 'btn-info' : ''
           };
           var tmpl = module.vocabularyTemplate(data);
-          tmpl.find("button").on('click', function(e){
-            module.toggleVocabulary($(e.target).data('id'));
+          tmpl.find(".func-activate").on('click', function(e){
+            module.toggleVocabulary($(e.target).parent().data('id'));
+          });
+          tmpl.find(".func-download").on('click', function(e){
+            Unword.Files.downloadVocabulary($(e.target).parent().data('id'));
+          });
+          tmpl.find(".func-remove").on('click', function(e){
+            $(e.target).attr('disabled','disabled');
+            $(e.target).html('wait ...');
+            Unword.Models.Vocabulary.deleteRecursive($(e.target).parent().data('id'), function(){
+              module.tabVocabularies();
+            });
           });
           $(".tmpl-holder").append(tmpl);
         });
@@ -143,10 +160,3 @@ Unword.Popup = (function () {
   }
   return module;
 }());
-
-$(function(){
-  Unword.Popup.init();
-  setTimeout(function(){
-    $("#question-answer").focus();
-  }, 300);
-});
