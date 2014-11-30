@@ -1,5 +1,6 @@
 angular.module('unword.controllers')
-.controller('VocabulariesController', function($scope, dialogs, VocabulariesService){
+.controller('VocabulariesController', [ '$scope', 'dialogs', 'VocabulariesService', 
+  function($scope, dialogs, VocabulariesService){
   
   // angular not support change on file input
   document.getElementById("func-add-vocabulary").addEventListener("change", function(){
@@ -44,7 +45,7 @@ angular.module('unword.controllers')
     });
   });
   // end
-})
-.controller('ConfigController', function($scope){
-  
-});
+}])
+.controller('ConfigController',['$scope' ,function($scope){
+  // nothing yet
+}]);

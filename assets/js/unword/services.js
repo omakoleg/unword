@@ -13,7 +13,7 @@ angular.module('unword.services')
     }
   }
 })
-.service('VocabulariesService', function($q, dialogs){
+.service('VocabulariesService', ['$q', 'dialogs', function($q, dialogs){
   var module = {};
   module.loadVocabularies = function(cb){
     Unword.Storage.readAll('vocabularies', function(list){
@@ -24,10 +24,8 @@ angular.module('unword.services')
     Papa.parse(file, {
       header: true,
     	complete: function(results) {
-    		console.log(file.name, results);
         if(results.data.length){
-          var name = file.name.slice(0, -4);
-          module._generateVocabularyWithQuestions(name, results.data, cb);
+          module._generateVocabularyWithQuestions(file.name.slice(0, -4), results.data, cb);
         }
     	}
     });   
@@ -91,16 +89,11 @@ angular.module('unword.services')
   // generate csv contents from list of questions
   module._generateCsvFormat = function(questions, cb){
     var data = [];
-    console.log(questions);
     questions.forEach(function(item, index){
       data.push(Unword.Models.Question.to_csv(item));
     });
-    var csv = Papa.unparse(data);
-    if(cb){
-      console.log(csv);
-      cb(csv);
-    }
+    cb(Papa.unparse(data));
   } 
   
   return module;
-})
+}]);

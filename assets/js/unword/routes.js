@@ -1,5 +1,5 @@
 angular.module('unword.routes', ['ngRoute'])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/vocabularies',{
         templateUrl: 'unword/vocabularies.html',
@@ -12,4 +12,4 @@ angular.module('unword.routes', ['ngRoute'])
       .otherwise({
         redirectTo: '/vocabularies'
       });
-  });
+  }]);
