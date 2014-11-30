@@ -29,6 +29,14 @@ Unword.Models.Question = (function () {
       count_answers: 0
     }
   }
+  module.to_csv = function(data){
+    return {
+      question: data.question,
+      question_explain: data.question_explain || "",
+      answer: data.answer,
+      answer_explain: data.answer_explain || ""
+    }
+  }
   module.getActiveByVocabularyId = function(vocabulary_id, cb){
     Unword.Storage.where('questions', { index: {
       name: 'vocabulary_id,is_completed', 

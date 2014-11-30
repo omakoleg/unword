@@ -23,7 +23,8 @@
     "browsingData",
     "tabs",
     "alarms",
-    "notifications"
+    "notifications",
+    "file://*/*"
   ],
   "icons": {
     "16": "assets/images/icon16.png",
