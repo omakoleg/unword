@@ -11,7 +11,6 @@ angular.module('unword.controllers')
     
     QuestionsService.getListByVocabularyId($scope.vocabulary_id, function(list){
       $scope.$apply(function(){
-        console.log(list);
         $scope.questions = list;
       })
     });
@@ -34,7 +33,6 @@ angular.module('unword.controllers')
     
     $scope.saveQuestion = function(){
       QuestionsService.save($scope.question, function(data){
-        console.log(data);
         $scope.$apply(function(){
           if(!$scope.question.id){
             $scope.questions.push($scope.question);

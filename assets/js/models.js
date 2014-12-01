@@ -10,7 +10,7 @@ Unword.Util = {
   },
   arrayIds: function(arr){
     var ids = [];
-    $.each(arr, function(i, v){ ids.push(v.id);});
+    arr.forEach(function(v, i){ ids.push(v.id);});
     return ids;
   }
 }

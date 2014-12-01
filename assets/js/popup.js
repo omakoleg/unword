@@ -84,8 +84,8 @@ Unword.Popup = (function () {
             console.log('no questions in vocabulary'); 
           } else {
             module.question = Unword.Util.arrayRandom(questions);
-            $("#question-text").html(module.question.question);
-            $("#question-explain").html(module.question.question_explain);
+            $("#question-text").html(module.question.question +' ?');
+            $("#question-example").html(module.question.question_explain);
             $(".count-answers").html(module.question.count_answers);
           }
         });

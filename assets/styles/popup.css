@@ -3,7 +3,7 @@
 }
 body {
   min-width: 550px;
-  min-height: 200px;
+  min-height: 50px;
   padding: 10px;
 }
 .header-actions{ 

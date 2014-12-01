@@ -13,6 +13,7 @@ Unword.Storage = (function () {
     console.log('upgraded');
     var db = e.target.result;
     if(!db.objectStoreNames.contains('questions')) {
+      console.log('update questions');
       var os = db.createObjectStore('questions', { 
         keyPath: 'id', 
         autoIncrement: true 

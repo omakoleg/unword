@@ -24,7 +24,7 @@
     <button class="btn btn-xs btn-default func-download" ng-click="download(voc)">download</button>
     <button class="btn btn-xs {{ voc.is_active ? 'btn-info' : 'btn-default' }}"
       ng-click="activate(voc)">
-      {{voc.is_active ? 'active' : 'activate' }}
+      {{voc.is_active ? 'disable' : 'enable' }}
     </button>
     {{ voc.name }}
   </li>

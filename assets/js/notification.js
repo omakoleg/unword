@@ -2,36 +2,43 @@ var Unword = Unword || {};
 
 Unword.Notification = (function () {
   var module = {};
-  module.show = function(message, timeout){
-    if(!timeout){ timeout = 1; }
-    var notification = new Notification(message);
-    setTimeout(function(){ notification.close(); }, timeout * 1000);
+  module.show = function(message, delay){
+    var notification = chrome.notifications.create('message', {
+      message: message,
+      type: 'basic',
+      iconUrl: 'assets/images/icon48.png',
+      title: 'Unword'
+    }, function(){ /* none */ });
+    setTimeout(function(){ 
+      chrome.notifications.clear('message', function(){ /* none */});
+    }, delay || 5000);
   }
-  
   return module;
 }());
 
 Unword.Tick = (function () {
-  var module = {};
+  var module = {
+    warnShown: false
+  };
   module.run = function(){
-    chrome.alarms.onAlarm.addListener(function(alarm) {
-      Unword.Notification.show('Tick', 1);
-    });
-    chrome.alarms.create("Start", { periodInMinutes:0.1 });
     setTimeout(function(){
-      chrome.alarms.clear("Start");
-      Unword.Notification.show('Tick cleared', 1);
-    }, 20* 1000);
-  }
-  return module;
-}());
-
-Unword.Badge = (function () {
-  var module = {};
-  module.update = function(){
-    Unword.Storage.count('vocabularies', { index: {name: "is_active", value: 1 }}, function(count){
-      chrome.browserAction.setBadgeText({text: String(count)});
-    })
+      Unword.Notification.show("I will remind You to answer some questions");
+    }, 5000);
+    chrome.alarms.onAlarm.addListener(function(alarm) {
+      Unword.Models.Vocabulary.getRandomActive(function(item){
+        if(item){
+          Unword.Notification.show("It is time to answer some questions.");
+        } else if(!module.warnShown){
+          module.warnShown = true;
+          Unword.Notification.show('You didnt enable any vocabularies yet. Open extension settings and click activate.', 15000);
+        }
+      });
+    });
+    chrome.alarms.create("Start", { periodInMinutes: 30 });
+    // setTimeout(function(){
+//       chrome.alarms.clear("Start");
+//       Unword.Notification.show('Tick cleared', 1);
+//     }, 20* 1000);
   }
   return module;
 }());
