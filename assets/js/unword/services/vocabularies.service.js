@@ -1,25 +1,15 @@
 angular.module('unword.services')
-.service('dialogs', function(){
-  return {
-    ask: function(message, cb, cb2){
-      if(confirm(message)){
-        cb();
-      } else if(cb2){
-        cb2();
-      }
-    },
-    show: function(message){
-      alert(message);
-    }
-  }
-})
 .service('VocabulariesService', ['$q', 'dialogs', function($q, dialogs){
   var module = {};
-  module.loadVocabularies = function(cb){
-    Unword.Storage.readAll('vocabularies', function(list){
-      cb(list);
-    });
+  
+  module.get = function(id, cb){
+    Unword.Storage.get('vocabularies', id, cb || angular.noop);
   }
+  
+  module.loadVocabularies = function(cb){
+    Unword.Storage.readAll('vocabularies', cb || angular.noop);
+  }
+  
   module.loadCsvFile = function(file, cb){
     Papa.parse(file, {
       header: true,

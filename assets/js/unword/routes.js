@@ -5,6 +5,10 @@ angular.module('unword.routes', ['ngRoute'])
         templateUrl: 'unword/vocabularies.html',
         controller: 'VocabulariesController'
       })
+      .when('/questions/:vocabulary_id',{
+        templateUrl: 'unword/questions.html',
+        controller: 'QuestionsController'
+      })
       .when('/config',{
         templateUrl: 'unword/config.html',
         controller: 'ConfigController'

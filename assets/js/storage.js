@@ -65,6 +65,21 @@ Unword.Storage = (function () {
       };
     });
   }
+  module.save = function(store_name, data, cb){
+    module.transaction(store_name, function(transaction, store){
+      var request = null;
+      if(data.id){
+        request = store.put(data);
+      } else {
+        request = store.add(data);
+      }
+      request.onerror = module.logError;
+      request.onsuccess = function(e){
+        if(cb){ cb(e.target.result); }; // will return id
+      };
+    });
+  }
+  
   module.add = function(store_name, data, callback){
     module.transaction(store_name, function(transaction, store){
       var request = store.add(data);

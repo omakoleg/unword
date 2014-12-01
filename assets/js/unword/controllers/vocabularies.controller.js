@@ -1,5 +1,5 @@
 angular.module('unword.controllers')
-.controller('VocabulariesController', [ '$scope', 'dialogs', 'VocabulariesService', 
+.controller('VocabulariesController', [ '$scope', 'dialogs', 'VocabulariesService',
   function($scope, dialogs, VocabulariesService){
   
   // angular not support change on file input
@@ -22,19 +22,19 @@ angular.module('unword.controllers')
     }
     document.getElementById("func-add-vocabulary").value = "";
   });
-  //
+  // download file
   $scope.download = function(vocabulary){
     VocabulariesService.generateCsvFile(vocabulary.id);
   }
-  //
+  // delete voabulary
   $scope.remove = function(vocabulary){
     VocabulariesService.remove(vocabulary, function(){
       $scope.$apply(function(){
-        $scope.vocabularies.splice( $scope.vocabularies.indexOf(vocabulary), 1 );
+        $scope.vocabularies.splice($scope.vocabularies.indexOf(vocabulary), 1 );
       });
     });
   }
-  //
+  // toggle active
   $scope.activate = function(vocabulary){
     VocabulariesService.toggleActive(vocabulary);
   }
@@ -44,8 +44,4 @@ angular.module('unword.controllers')
       $scope.vocabularies = list;
     });
   });
-  // end
 }])
-.controller('ConfigController',['$scope' ,function($scope){
-  // nothing yet
-}]);

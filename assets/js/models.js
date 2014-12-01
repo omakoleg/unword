@@ -18,6 +18,9 @@ Unword.Util = {
 Unword.Models = {};
 Unword.Models.Question = (function () {
   var module = { }
+  module.save = function(data, cb){
+    Unword.Storage.save('questions', data, cb);
+  }
   module.new = function(data){
     return {
       vocabulary_id: data.vocabulary_id,
@@ -41,6 +44,14 @@ Unword.Models.Question = (function () {
     Unword.Storage.where('questions', { index: {
       name: 'vocabulary_id,is_completed', 
       value: [vocabulary_id, 0]
+    }}, function(data){
+      cb(data);
+    });
+  }
+  module.getByVocabularyId = function(vocabulary_id, cb){
+    Unword.Storage.where('questions', { index: {
+      name: 'vocabulary_id', 
+      value: vocabulary_id
     }}, function(data){
       cb(data);
     });

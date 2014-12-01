@@ -14,6 +14,7 @@
 <ul class="list-group">
   <li ng-repeat="voc in vocabularies  track by $index" class="list-group-item">
     <button class="btn btn-xs btn-danger" ng-click="remove(voc)">remove</button>
+    <a class="btn btn-xs btn-default" ng-href="#/questions/{{voc.id}}">questions</a>
     <button class="btn btn-xs btn-default func-download" ng-click="download(voc)">download</button>
     <button class="btn btn-xs {{ voc.is_active ? 'btn-info' : 'btn-default' }}"
       ng-click="activate(voc)">
