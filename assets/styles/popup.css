@@ -21,3 +21,6 @@ body {
 .vocabularies-list .list-group{
   padding: 10px;
 }
+.cursor-pointer{
+  cursor: pointer;
+}

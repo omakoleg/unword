@@ -2,7 +2,7 @@ angular.module('unword.controllers')
 .controller('VocabulariesController', [ '$scope', 'dialogs', 'VocabulariesService',
   function($scope, dialogs, VocabulariesService){
   
-  // angular not support change on file input
+  // angular not support change on file input, need to write tons of shit ):
   document.getElementById("func-add-vocabulary").addEventListener("change", function(){
     if(event.target.files.length == 0){ return; };
     var file = event.target.files[0];
@@ -13,12 +13,18 @@ angular.module('unword.controllers')
         VocabulariesService.loadVocabularies(function(list){
           $scope.$apply(function(){
             $scope.vocabularies = list;
+            $scope.addSuccessAlert = true;
+            setTimeout(function(){
+              $scope.$apply(function(){ $scope.addSuccessAlert = false; })
+            }, 3000);
           });
         });
-        dialogs.show('File loaded');
   		});
     } else {
-      dialogs.show("This is not csv file");
+      $scope.$apply(function(){ $scope.addErrorAlert = true; });
+      setTimeout(function(){
+        $scope.$apply(function(){ $scope.addErrorAlert = false; })
+      }, 3000);
     }
     document.getElementById("func-add-vocabulary").value = "";
   });
