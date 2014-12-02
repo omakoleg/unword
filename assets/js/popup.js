@@ -50,9 +50,10 @@ Unword.Popup = (function () {
       // show message or load next
       if(answer != module.question.answer){
         module.accept_answer = false;
-        $(".answer-elements").removeClass('hidden');
-        $("#answer").html(module.question.answer);
-        $("#answer-explain").html(module.question.answer_explain);
+        $("#answer").removeClass('hidden');
+        if(module.question.answer_explain){
+          $("#answer-explain").removeClass('hidden');
+        }
         module.updateCounters(false);
       } else{
         module.updateCounters(true, function(){
@@ -66,11 +67,8 @@ Unword.Popup = (function () {
   }
   
   module.tabQuestions = function(){
-    // clean answer
-    // turn accept
-    // hide message
     $("#question-answer").val('');
-    $(".answer-elements").addClass('hidden').val('');
+    $("#question,#question-explain, #answer, #answer-explain").addClass('hidden');
     module.accept_answer = true;
     // search for random question in random active vocabulary
     Unword.Models.Vocabulary.getRandomActive(function(vocabulary){
@@ -85,7 +83,13 @@ Unword.Popup = (function () {
           } else {
             module.question = Unword.Util.arrayRandom(questions);
             $("#question-text").html(module.question.question +' ?');
-            $("#question-example").html(module.question.question_explain);
+            $("#answer").html(module.question.answer);
+            if(module.question.question_explain){
+              $("#question-explain").removeClass('hidden').html(module.question.question_explain);
+            }
+            if(module.question.answer_explain){
+              $("#answer-explain").html(module.question.answer_explain);
+            }
             $(".count-answers").html(module.question.count_answers);
           }
         });
