@@ -1,0 +1,51 @@
+<div>
+  Vocabulary <strong>{{vocabulary.name}}</strong> questions
+</div>
+<br/>
+<div ng-show="question">
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="inputQuestion" class="col-sm-4 control-label">Question</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="inputQuestion" ng-model="question.question">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputQuestionExplain" class="col-sm-4 control-label">Question explain</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="inputQuestionExplain" ng-model="question.question_explain">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAnswer" class="col-sm-4 control-label">Answer</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="inputAnswer" ng-model="question.answer">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAnswerExplain" class="col-sm-4 control-label">Answer explain</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="inputAnswerExplain" ng-model="question.answer_explain">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-4">
+        <button class="btn btn-link" ng-click="cancelForm()">cancel</button>
+        <button class="btn btn-primary" ng-click="saveQuestion()">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div ng-hide="question">
+  <button class="btn btn-sm btn-primary" ng-click="addQuestion()">Add question</button>
+</div>
+<br/>
+<div class="questions-container">
+  <ul class="list-group">
+    <li ng-repeat="question in questions track by $index" class="list-group-item">
+      <button class="btn btn-xs btn-danger" ng-click="removeQuestion(question)">remove</button>
+      <button class="btn btn-xs btn-default" ng-click="editQuestion(question)">edit</button>
+      {{ question.question }} | {{ question.answer}}
+    </li>
+  </ul>
+</div>

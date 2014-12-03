@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <title>questions</title>
+    <link rel="stylesheet" media="all" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" media="all" href="../styles/popup.css"/>
+    <!-- build:js js/popup.min.js -->
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/notification.js"></script>
+    <script src="../js/models.js"></script>
+    <script src="../js/popup.js"></script>
+    <script src="../js/popup-page.js"></script>
+    <!-- /build -->
+  </head>
+  <body>
+    <div class="no-vocabularies hidden">
+      <br/>
+      <div class="alert alert-warning" role="alert">
+        No active vocabularies found.<br/><br/>
+        Click <span class="label label-default func-settings cursor-pointer">settings</span> to enable one or more vocabularies with questions.
+      </div>
+    </div>
+            
+    <div class="questions-container">
+      <!-- main -->
+      <div class="pull-right">
+        <span class="label label-success count-answers">0</span>
+        <span class="label label-default count-all">0</span>
+        <span class="label label-success vocabulary-name">-</span>
+        <span class="label label-default func-settings cursor-pointer">settings</span>
+      </div>
+      <br/>
+      <div>
+        <blockquote>
+          <p id="question-text">Some question</p>
+          <footer id="question-example">Some question explanaiton to understand context</footer>
+          <p id="answer"></p>
+          <footer id="answer-explain"></footer>
+        </blockquote>
+      </div>
+      <div role="form">
+        <div class="form-group">
+          <input type="hidden" id="question-id"/>
+          <textarea class="form-control" rows="5" id="question-answer"></textarea>
+          <p class="help-block">
+            <small><em>
+              Submitting wrong / empty answer will show answer. 
+              To continue press enter
+            </em></small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

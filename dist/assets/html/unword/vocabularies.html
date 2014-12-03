@@ -1,0 +1,32 @@
+<div>
+  <small>
+    Choose new vocabulary file. Csv extension only. 
+    Csv file should contain columns: question, question_explain, answer, anwser_explain.
+  </small>
+  <input type="file" id="func-add-vocabulary"/>
+  <div class="alert alert-success margin-top-20" role="alert" ng-show="addSuccessAlert">
+    New vocabulary added
+  </div>
+  <div class="alert alert-danger margin-top-20" role="alert" ng-show="addErrorAlert">
+    Cant add new vocabulary. Wrong file format.
+  </div>
+</div>
+<br/>
+<div>
+  <small>
+    Questions will appear randomly from random active vocabulary.
+  </small>
+</div>
+<ul class="list-group">
+  <li ng-repeat="voc in vocabularies track by $index" class="list-group-item">
+    <button class="btn btn-xs btn-danger" ng-click="remove(voc)">remove</button>
+    <a class="btn btn-xs btn-default" ng-href="#/questions/{{voc.id}}">questions</a>
+    <button class="btn btn-xs btn-default func-download" ng-click="download(voc)">download</button>
+    <button class="btn btn-xs {{ voc.is_active ? 'btn-info' : 'btn-default' }}"
+      ng-click="activate(voc)">
+      {{voc.is_active ? 'disable' : 'enable' }}
+    </button>
+    {{ voc.name }}
+  </li>
+</ul>
+

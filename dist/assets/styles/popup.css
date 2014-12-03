@@ -1,0 +1,26 @@
+*{
+  color: #274245;
+}
+body {
+  min-width: 550px;
+  min-height: 50px;
+  padding: 10px;
+}
+.header-actions{ 
+  padding: 10px 0 0 0;
+  height: 50px;
+}
+.spacer{
+  height: 40px;
+}
+.vocabularies-list{
+  padding: 10px 0 0 0;
+  max-height: 385px;
+  overflow-y: scroll;
+}
+.vocabularies-list .list-group{
+  padding: 10px;
+}
+.cursor-pointer{
+  cursor: pointer;
+}

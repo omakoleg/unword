@@ -1,0 +1,26 @@
+{
+  "name": "unword",
+  "version": "1.0.0",
+  "description": "Chrome extension to store selected chunks of text to indexedDb.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omakoleg/unword.git"
+  },
+  "author": "Oleg Maki",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/omakoleg/unword/issues"
+  },
+  "homepage": "https://github.com/omakoleg/unword",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-processhtml": "^0.3.3"
+  }
+}
