@@ -4,6 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: ["dist"],
+    // ------------------------------------------------------------
     processhtml: {
       options: {
       },
@@ -14,6 +15,7 @@ module.exports = function(grunt) {
         }
       }
     },
+    // ------------------------------------------------------------
     cssmin: {
       add_banner: {
         options: {
@@ -32,6 +34,7 @@ module.exports = function(grunt) {
         }
       }
     },
+    // ------------------------------------------------------------
     uglify: {
       options: {
         mangle: {
@@ -77,12 +80,24 @@ module.exports = function(grunt) {
         }
       }
     },
+    // ------------------------------------------------------------
     copy: {
       main: {
         files: [
           {expand: true, cwd: 'app/html', src: ['unword/**'], dest: 'dist/html/'},
           {expand: true, cwd: 'app/images', src: ['**'], dest: 'dist/images/'},
           {expand: true, cwd: 'app/', src: 'manifest.json', dest: 'dist/'},
+        ]
+      }
+    },
+    // ------------------------------------------------------------
+    compress: {
+      main: {
+        options: {
+          archive: 'dist/package.zip'
+        },
+        files: [
+          {src: ['dist/**'], dest: '/'}
         ]
       }
     }
@@ -93,8 +108,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-processhtml');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'processhtml']);
+  grunt.registerTask('default', ['clean', 'copy', 'uglify', 'cssmin', 'processhtml', 'compress']);
 
 };
