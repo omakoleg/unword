@@ -2,22 +2,19 @@
 <html lang="en" data-ng-app="unword.app" data-ng-csp="">
   <head>
     <title>Unword background page</title>
-    <style>
-      body {
-        padding: 10px;
-      }
-    </style>
-    
+
+    <!-- build:css ../styles/background.min.css -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
+    <link rel="stylesheet" href="../styles/background.css" />
+    <!-- /build -->
+    <!-- build:js ../js/background.min.js -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-route/angular-route.js"></script>
-    <link rel="stylesheet" media="all" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../bower_components/angular/angular-csp.css" />
-    <link rel="stylesheet" href="../styles/background.css" />
     
     <script src="../js/lib/papaparse.js"></script>
-    
     <script src="../js/storage.js"></script>
     <script src="../js/notification.js"></script>
     <script src="../js/models.js"></script>
@@ -30,6 +27,7 @@
     <script src="../js/unword/services/questions.service.js"></script>
     <script src="../js/unword/services/vocabularies.service.js"></script>
     <script src="../js/unword/services/dialogs.service.js"></script>
+    <!-- /build -->
   </head>
   <body>
     <nav class="navbar navbar-default" role="navigation">

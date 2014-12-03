@@ -1,3 +1,7 @@
+body {
+  padding: 10px;
+}
+
 .questions-container{
   max-height: 400px;
   overflow-y: scroll;
