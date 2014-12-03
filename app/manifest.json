@@ -2,19 +2,19 @@
   "manifest_version": 2,
   "name": "Unknown words",
   "description": "Helps to learn words by asking questions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "background": {
     "scripts": [
-      "assets/js/storage.js",
-      "assets/js/notification.js",
-      "assets/js/models.js",
+      "js/storage.js",
+      "js/notification.js",
+      "js/models.js",
       "main.js"
     ],
     "persistent": false
   },
   "browser_action": {
-    "default_icon": "assets/images/icon128.png",
-    "default_popup": "assets/html/popup.html"
+    "default_icon": "images/icon128.png",
+    "default_popup": "html/popup.html"
   },
   "permissions": [
     "contextMenus",
@@ -27,8 +27,8 @@
     "file://*/*"
   ],
   "icons": {
-    "16": "assets/images/icon16.png",
-    "48": "assets/images/icon48.png",
-    "128": "assets/images/icon128.png"
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
   }
 }

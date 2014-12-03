@@ -6,12 +6,11 @@ module.exports = function(grunt) {
     clean: ["dist"],
     processhtml: {
       options: {
-        // Task-specific options go here.
       },
       dist: {
         files: {
-          "dist/assets/html/popup.html": ['assets/html/popup.html'],
-          "dist/assets/html/background.html": ['assets/html/background.html']
+          "dist/html/popup.html": ['app/html/popup.html'],
+          "dist/html/background.html": ['app/html/background.html']
         }
       }
     },
@@ -24,14 +23,14 @@ module.exports = function(grunt) {
       },
       my_target: {
         files: {
-          'dist/assets/js/popup.min.js': [
+          'dist/js/popup.min.js': [
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap/dist/js/bootstrap.min.js',
-            'assets/js/storage.js',
-            'assets/js/notification.js',
-            'assets/js/models.js',
-            'assets/js/popup.js',
-            'assets/js/popup-page.js'
+            'app/js/storage.js',
+            'app/js/notification.js',
+            'app/js/models.js',
+            'app/js/popup.js',
+            'app/js/popup-page.js'
           ]
         }
       }
@@ -39,8 +38,8 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          { src: 'assets/html/unword/**', dest: 'dist/' },
-          { src: 'assets/styles/**', dest: 'dist/' },
+          {expand: true, cwd: 'app/html', src: ['unword/**'], dest: 'dist/html/'},
+          {expand: true, cwd: 'app/styles', src: ['**'], dest: 'dist/styles/'}
         ]
       }
     }

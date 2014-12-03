@@ -6,7 +6,7 @@ Unword.Notification = (function () {
     var notification = chrome.notifications.create('message', {
       message: message,
       type: 'basic',
-      iconUrl: 'assets/images/icon48.png',
+      iconUrl: 'images/icon48.png',
       title: 'Unword'
     }, function(){ /* none */ });
     setTimeout(function(){ 

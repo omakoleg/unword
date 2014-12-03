@@ -14,7 +14,7 @@ Unword.Popup = (function () {
     }, 300);
     
     $(".func-settings").on('click', function(){
-      chrome.tabs.create({'url': chrome.extension.getURL('assets/html/background.html')});
+      chrome.tabs.create({'url': chrome.extension.getURL('html/background.html')});
     });
   }  
   
