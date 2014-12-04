@@ -67,6 +67,7 @@ Unword.Popup = (function () {
   }
   
   module.tabQuestions = function(){
+    $(".no-vocabularies, .no-questions").addClass('hidden');
     $("#question-answer").val('');
     $("#question,#question-explain, #answer, #answer-explain").addClass('hidden');
     module.accept_answer = true;
@@ -74,12 +75,13 @@ Unword.Popup = (function () {
     Unword.Models.Vocabulary.getRandomActive(function(vocabulary){
       if(vocabulary){
         $(".questions-container").removeClass('hidden');
-        $(".no-vocabularies").addClass('hidden');
         $(".vocabulary-name").html(vocabulary.name);
         Unword.Models.Question.getActiveByVocabularyId(vocabulary.id, function(questions){
           $(".count-all").html(questions.length);
           if(questions.length == 0){
             console.log('no questions in vocabulary'); 
+            $(".no-questions").removeClass('hidden');
+            module.accept_answer = false;
           } else {
             module.question = Unword.Util.arrayRandom(questions);
             $("#question-text").text(module.question.question +' ?');
@@ -95,7 +97,6 @@ Unword.Popup = (function () {
         });
       } else {
         $(".questions-container").addClass('hidden');
-        $(".no-vocabularies").removeClass('hidden');
       }
     });
   }

@@ -61,6 +61,8 @@
     <li ng-repeat="question in questions track by $index" class="list-group-item">
       <button class="btn btn-xs btn-danger" ng-click="removeQuestion(question)">remove</button>
       <button class="btn btn-xs btn-default" ng-click="editQuestion(question)">edit</button>
+      <span class="label label-default" ng-if="!question.is_completed">{{question.count_answers}}</span>
+      <span class="label label-success" ng-if="question.is_completed">ok</span>
       {{ question.question }} | {{ question.answer}}
     </li>
   </ul>
