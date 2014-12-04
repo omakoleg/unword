@@ -11,15 +11,48 @@
     Cant add new vocabulary. Wrong file format.
   </div>
 </div>
+<script type="text/ng-template" id="error-messages">
+  <span class="label label-danger" ng-message="required">required</span>
+  <span class="label label-danger" ng-message="minlength">too short</span>
+  <span class="label label-danger" ng-message="maxlength">too long</span>
+</script>
+
+<br/>
+<div ng-show="vocabulary">
+  <form class="form-horizontal" role="form" name="vocabularyForm" novalidate
+    ng-submit="saveVocabulary(vocabularyForm.$valid)">
+    <div class="form-group">
+      <label for="inputName" class="col-sm-4 control-label">Name</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="inputName" ng-model="vocabulary.name" name="name"
+        minlength="10" maxlength="255" required
+        ng-model-options="{ debounce: 100 }"/>
+        <div ng-messages="vocabularyForm.name.$error" class="help-block" ng-messages-include="error-messages">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-4">
+        <button class="btn btn-link" ng-click="cancelForm()">cancel</button>
+        <button class="btn btn-primary" type="bubmit">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div ng-hide="vocabulary">
+  <button class="btn btn-sm btn-primary" ng-click="addVocabulary()">Add empty vocabulary</button>
+</div>
 <br/>
 <div>
   <small>
     Questions will appear randomly from random active vocabulary.
   </small>
 </div>
+
 <ul class="list-group">
   <li ng-repeat="voc in vocabularies track by $index" class="list-group-item">
     <button class="btn btn-xs btn-danger" ng-click="remove(voc)">remove</button>
+    <button class="btn btn-xs btn-default" ng-click="editVocabulary(voc)">edit</button>
     <a class="btn btn-xs btn-default" ng-href="#/questions/{{voc.id}}">questions</a>
     <button class="btn btn-xs btn-default func-download" ng-click="download(voc)">download</button>
     <button class="btn btn-xs {{ voc.is_active ? 'btn-info' : 'btn-default' }}"

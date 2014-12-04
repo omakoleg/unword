@@ -10,6 +10,10 @@ angular.module('unword.services')
     Unword.Storage.readAll('vocabularies', cb || angular.noop);
   }
   
+  module.save = function(data, cb){
+    Unword.Models.Vocabulary.save(data, cb);
+  }
+  
   module.loadCsvFile = function(file, cb){
     Papa.parse(file, {
       header: true,

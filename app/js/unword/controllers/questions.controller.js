@@ -36,6 +36,7 @@ angular.module('unword.controllers')
         QuestionsService.save($scope.question, function(data){
           $scope.$apply(function(){
             if(!$scope.question.id){
+              $scope.question.id = data;
               $scope.questions.push($scope.question);
             }
             $scope.question = null;

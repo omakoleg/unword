@@ -67,6 +67,9 @@ Unword.Models.Vocabulary = (function () {
       is_active: data.is_active || 0
     }
   }
+  module.save = function(data, cb){
+    Unword.Storage.save('vocabularies', data, cb);
+  }
   // remove all questions and delete vocabulary. 
   // delete empty vocabulary
   module.deleteRecursive = function(vacabularyId, cb){

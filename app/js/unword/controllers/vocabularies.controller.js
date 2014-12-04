@@ -32,7 +32,7 @@ angular.module('unword.controllers')
   $scope.download = function(vocabulary){
     VocabulariesService.generateCsvFile(vocabulary.id);
   }
-  // delete voabulary
+
   $scope.remove = function(vocabulary){
     VocabulariesService.remove(vocabulary, function(){
       $scope.$apply(function(){
@@ -40,11 +40,36 @@ angular.module('unword.controllers')
       });
     });
   }
-  // toggle active
+  
   $scope.activate = function(vocabulary){
     VocabulariesService.toggleActive(vocabulary);
   }
-  // list
+  
+  $scope.addVocabulary = function(){
+    $scope.vocabulary = Unword.Models.Vocabulary.new({name: "Sample name"});
+  }
+  
+  $scope.saveVocabulary = function(isValid){
+    if(isValid){
+      VocabulariesService.save($scope.vocabulary, function(data){
+        $scope.$apply(function(){
+          if(!$scope.vocabulary.id){
+            $scope.vocabulary.id = data;
+            $scope.vocabularies.push($scope.vocabulary);
+          }
+          $scope.vocabulary = null;
+        });
+      });
+    }
+  }
+  
+  $scope.cancelForm = function(){
+    $scope.vocabulary = null;
+  }
+  
+  $scope.editVocabulary = function(vocabulary){
+    $scope.vocabulary = vocabulary;
+  }
   VocabulariesService.loadVocabularies(function(list){
     $scope.$apply(function(){
       $scope.vocabularies = list;
