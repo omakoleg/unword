@@ -2,12 +2,24 @@
   Vocabulary <strong>{{vocabulary.name}}</strong> questions
 </div>
 <br/>
+
+<script type="text/ng-template" id="error-messages">
+  <span class="label label-danger" ng-message="required">required</span>
+  <span class="label label-danger" ng-message="minlength">too short</span>
+  <span class="label label-danger" ng-message="maxlength">too long</span>
+</script>
+
 <div ng-show="question">
-  <form class="form-horizontal" role="form">
+  <form class="form-horizontal" role="form" name="questionForm" novalidate
+    ng-submit="saveQuestion(questionForm.$valid)">
     <div class="form-group">
       <label for="inputQuestion" class="col-sm-4 control-label">Question</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="inputQuestion" ng-model="question.question">
+        <input type="text" class="form-control" id="inputQuestion" ng-model="question.question" name="question"
+        minlength="10" maxlength="255" required
+        ng-model-options="{ debounce: 100 }"/>
+        <div ng-messages="questionForm.question.$error" class="help-block" ng-messages-include="error-messages">
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -19,7 +31,11 @@
     <div class="form-group">
       <label for="inputAnswer" class="col-sm-4 control-label">Answer</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="inputAnswer" ng-model="question.answer">
+        <input type="text" class="form-control" id="inputAnswer" ng-model="question.answer" name="answer"
+          minlength="1" maxlength="255" required
+          ng-model-options="{ debounce: 100 }"/>
+        <div ng-messages="questionForm.answer.$error" class="help-block" ng-messages-include="error-messages">
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -31,7 +47,7 @@
     <div class="form-group">
       <div class="col-sm-offset-4 col-sm-4">
         <button class="btn btn-link" ng-click="cancelForm()">cancel</button>
-        <button class="btn btn-primary" ng-click="saveQuestion()">Save</button>
+        <button class="btn btn-primary" type="bubmit">Save</button>
       </div>
     </div>
   </form>

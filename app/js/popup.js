@@ -82,13 +82,13 @@ Unword.Popup = (function () {
             console.log('no questions in vocabulary'); 
           } else {
             module.question = Unword.Util.arrayRandom(questions);
-            $("#question-text").html(module.question.question +' ?');
-            $("#answer").html(module.question.answer);
+            $("#question-text").text(module.question.question +' ?');
+            $("#answer").text(module.question.answer);
             if(module.question.question_explain){
-              $("#question-explain").removeClass('hidden').html(module.question.question_explain);
+              $("#question-explain").removeClass('hidden').text(module.question.question_explain);
             }
             if(module.question.answer_explain){
-              $("#answer-explain").html(module.question.answer_explain);
+              $("#answer-explain").text(module.question.answer_explain);
             }
             $(".count-answers").html(module.question.count_answers);
           }

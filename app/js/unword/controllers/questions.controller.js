@@ -31,15 +31,17 @@ angular.module('unword.controllers')
       });
     }
     
-    $scope.saveQuestion = function(){
-      QuestionsService.save($scope.question, function(data){
-        $scope.$apply(function(){
-          if(!$scope.question.id){
-            $scope.questions.push($scope.question);
-          }
-          $scope.question = null;
+    $scope.saveQuestion = function(isValid){
+      if(isValid){
+        QuestionsService.save($scope.question, function(data){
+          $scope.$apply(function(){
+            if(!$scope.question.id){
+              $scope.questions.push($scope.question);
+            }
+            $scope.question = null;
+          });
         });
-      });
+      }
     }
     
     $scope.cancelForm = function(){

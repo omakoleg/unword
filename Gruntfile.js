@@ -62,6 +62,7 @@ module.exports = function(grunt) {
             'app/bower_components/bootstrap/dist/js/bootstrap.min.js',
             'app/bower_components/angular/angular.js',
             'app/bower_components/angular-route/angular-route.js',
+            'app/bower_components/angular-messages/angular-messages.js',
             // lib
             'app/lib/papaparse.js',
             'app/js/storage.js',
